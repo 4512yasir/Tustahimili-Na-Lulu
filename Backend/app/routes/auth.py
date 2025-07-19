@@ -29,7 +29,7 @@ def register():
         hashed_pw = bcrypt.generate_password_hash(data["password"]).decode("utf-8")
 
         # Get role object
-        role = Role.query.filter_by(name=data["role"]).first()
+        role = Role.query.filter(Role.name.ilike(data["role"])).first()
         if not role:
             return jsonify(message="Invalid role"), 400
 
